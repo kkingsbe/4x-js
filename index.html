@@ -13,6 +13,7 @@
         width: 100%;
         height: 100%;
         margin: 0;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
       }
       .viewport-container {
         position: relative;
@@ -31,12 +32,36 @@
         position: absolute;
         top: 0;
       }
-      table, th, td {
-        border: 1px solid black;
-        border-spacing: 5px;
+      table {
+        border-spacing: 0px;
       }
-      .sysSymmaryTable {
-        margin: 0 auto;
+      th {
+        background-color: #2a1659;
+        color: white;
+      }
+      tr {
+        background-color: #f2f2f2;
+        color: #595959;
+      }
+      tr:nth-child(even) {
+        background-color: white;
+      }
+      tr:last-child td:first-child {
+        border-bottom-left-radius: 6px;
+      }
+      tr:last-child td:last-child {
+        border-bottom-right-radius: 6px;
+      }
+      .table-center {
+        border-radius: 6px;
+        border-collapse: separate;
+        margin: auto;
+      }
+      .table-center th:first-child {
+        border-radius: 6px 0 0 0;
+      }
+      .table-center th:last-child {
+        border-radius: 0 6px 0 0;
       }
       .modal {
         display: none;
@@ -51,11 +76,12 @@
         background-color: rgba(0,0,0,0.4); /* Black with opacity */
       }
       .modal-content {
-        background-color: #fefefe;
+        background: linear-gradient(#8E2DE2, #4A00E0);
         margin: 15% auto;
         padding: 20px;
         border: 1px solid #888;
         width: 80%;
+        color: white;
       }
       .modal-body {
         width: 100%;
@@ -148,7 +174,7 @@
           <span class="close">&times;</span>
         </div>
         <div class="modal-body">
-          <table id="sysSummaryTable" class="sysSummaryTable" cellpadding="10">
+          <table id="sysSummaryTable" class="table-center" cellpadding="10">
             <thead>
               <tr>
                 <th>Planet Name</th>
@@ -169,7 +195,7 @@
             <span class="close">&times;</span>
           </div>
           <div class="modal-body" id="economyModalBody">
-            <table id="economySummaryTable" class="sysSummaryTable" cellpadding="10">
+            <table id="economySummaryTable" class="table-center" cellpadding="10">
               <thead>
                 <tr>
                   <th>Colony Name</th>
