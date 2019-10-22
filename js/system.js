@@ -96,7 +96,7 @@ class System
     var star = document.getElementById("starIcon");
     var starX = star.getAttribute("cx");
     var starY = star.getAttribute("cy");
-
+    
     this.planets.forEach((planet) => {
       var currentX = planet.icon.getAttribute("cx");
       var currentY = planet.icon.getAttribute("cy");
@@ -104,16 +104,16 @@ class System
       var xCorrected = +currentX - starX;
       var yCorrected = +currentY - starY;
 
-      var currentAngle = Math.atan(yCorrected / xCorrected);
-
-      var newX = (planet.radius * orbitScaling) * Math.cos(currentAngle + (orbitalRotationSpeedPx / (Math.sqrt((planet.icon.getAttribute("cx")**2 + planet.icon.getAttribute("cy")**2)*orbitScaling))));
-      var newY = (planet.radius * orbitScaling) * Math.sin(currentAngle + (orbitalRotationSpeedPx / (Math.sqrt((planet.icon.getAttribute("cx")**2 + planet.icon.getAttribute("cy")**2)*orbitScaling))));
+      var currentAngle = Math.atan2(yCorrected, xCorrected);
+      var arcLen = orbitalRotationSpeedPx * elapsedTime * orbitScaling;
+      var newAngle = currentAngle + (arcLen / (planet.radius * orbitScaling));
+      
+      var newY = (planet.radius * orbitScaling) * Math.sin(newAngle);
+      var newX = (planet.radius * orbitScaling) * Math.cos(newAngle);
 
       planet.icon.setAttribute("cx", newX + +starX);
       planet.icon.setAttribute("cy", newY + +starY);
-      planet.orbit.setAttribute("r", Math.sqrt(newX**2 + newY**2));
-      
-      //alert((orbitalRotationSpeedPx / (Math.sqrt((planet.icon.getAttribute("cx")**2 + planet.icon.getAttribute("cy")**2)*orbitScaling))));
+      //planet.orbit.setAttribute("r", Math.sqrt(newX**2 + newY**2));
     })
   }
 

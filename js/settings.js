@@ -1,6 +1,6 @@
 var backgroundcolor = "#00006b";
 var systemMinPlanets = 2;
-var systemMaxPlanets = 10;
+var systemMaxPlanets = 15;
 var planetDrawSize = 5;
 var orbitScaling = 45; //The orbit scaling / zoom level, used when drawing the planets and their orbits
 var starDrawSize = 15;

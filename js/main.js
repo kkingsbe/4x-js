@@ -15,7 +15,7 @@ var economySummary = false;
 var empire = new Empire("SpaceX");
 var system = new System();
 system.configure();
-system.drawSystem();
+system.drawSystem(0);
 
 empire.addColony("Colony 1", system.planets[0]);
 empire.colonies[0].addMine();
