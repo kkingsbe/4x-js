@@ -106,8 +106,8 @@ class System
 
       var currentAngle = Math.atan(yCorrected / xCorrected);
 
-      var newX = (planet.radius * orbitScaling) * Math.cos(currentAngle + (orbitalRotationSpeedPx / (Math.sqrt(planet.icon.getAttribute("cx")**2 + planet.icon.getAttribute("cy")**2))));
-      var newY = (planet.radius * orbitScaling) * Math.sin(currentAngle + (orbitalRotationSpeedPx / (Math.sqrt(planet.icon.getAttribute("cx")**2 + planet.icon.getAttribute("cy")**2))));
+      var newX = (planet.radius * orbitScaling) * Math.cos(currentAngle + (orbitalRotationSpeedPx / (Math.sqrt((planet.icon.getAttribute("cx")**2 + planet.icon.getAttribute("cy")**2)*orbitScaling))));
+      var newY = (planet.radius * orbitScaling) * Math.sin(currentAngle + (orbitalRotationSpeedPx / (Math.sqrt((planet.icon.getAttribute("cx")**2 + planet.icon.getAttribute("cy")**2)*orbitScaling))));
 
       planet.icon.setAttribute("cx", newX + +starX);
       planet.icon.setAttribute("cy", newY + +starY);
