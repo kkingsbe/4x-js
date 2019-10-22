@@ -112,6 +112,8 @@ class System
       planet.icon.setAttribute("cx", newX + +starX);
       planet.icon.setAttribute("cy", newY + +starY);
       planet.orbit.setAttribute("r", Math.sqrt(newX**2 + newY**2));
+      
+      console.log((orbitalRotationSpeedPx / (Math.sqrt((planet.icon.getAttribute("cx")**2 + planet.icon.getAttribute("cy")**2)*orbitScaling))));
     })
   }
 
