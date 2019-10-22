@@ -67,25 +67,25 @@ class Empire
       mines.innerHTML = colony.mines;
 
       var aluminium = document.createElement("td");
-      aluminium.innerHTML = colony.resources.Aluminium.amount;
+      aluminium.innerHTML = colony.resources.Aluminium.amount.toFixed(2);
 
       var carbon = document.createElement("td");
-      carbon.innerHTML = colony.resources.Carbon.amount;
+      carbon.innerHTML = colony.resources.Carbon.amount.toFixed(2);
 
       var iron = document.createElement("td");
-      iron.innerHTML = colony.resources.Iron.amount;
+      iron.innerHTML = colony.resources.Iron.amount.toFixed(2);
 
       var magnesium = document.createElement("td");
-      magnesium.innerHTML = colony.resources.Magnesium.amount;
+      magnesium.innerHTML = colony.resources.Magnesium.amount.toFixed(2);
 
       var silicon = document.createElement("td");
-      silicon.innerHTML = colony.resources.Silicon.amount;
+      silicon.innerHTML = colony.resources.Silicon.amount.toFixed(2);
 
       var sodium = document.createElement("td");
-      sodium.innerHTML = colony.resources.Sodium.amount;
+      sodium.innerHTML = colony.resources.Sodium.amount.toFixed(2);
 
       var water = document.createElement("td");
-      water.innerHTML = colony.resources.Water.amount;
+      water.innerHTML = colony.resources.Water.amount.toFixed(2);
 
       row.appendChild(name);
       row.appendChild(planet);
