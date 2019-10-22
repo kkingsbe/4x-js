@@ -102,6 +102,10 @@ class TerrestrialPlanet
     this.calculateAtmosphere();
     this.radius = this.calculateRadius();
     this.colonies = [];
+
+    //References to the SVG objects that are assigned when the system is initaly drawn
+    this.icon;
+    this.orbit;
   }
 
   //Generates the planets resources
@@ -175,6 +179,10 @@ class GasGiant
     this.calculateAtmosphere();
     this.radius = this.calculateRadius();
     this.colonies = [];
+
+    //References to the SVG objects that are assigned when the system is initaly drawn
+    this.icon;
+    this.orbit;
   }
 
   //Generates the planets resources

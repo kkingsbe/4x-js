@@ -44,6 +44,8 @@ class System
 
   newTurn(elapsedTime)
   {
+    this.drawSystem(elapsedTime);
+
     this.planets.forEach((planet) => {
       planet.colonies.forEach((colony) => {
         colony.gatherResources(elapsedTime);
@@ -51,27 +53,66 @@ class System
     })
   }
 
-  drawSystem()
+  configure()
   {
+    //Assign SVG objects to the planets
+    var bBox = viewport.getBoundingClientRect();
     this.planets.forEach((planet) => {
-      context.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
+      var orbit = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      orbit.setAttribute("id", planet.name + "_Orbit");
+      orbit.setAttribute("cy", bBox.height / 2);
+      orbit.setAttribute("cx", 0);
+      orbit.setAttribute("r", planet.radius * orbitScaling);
+      orbit.setAttribute("stroke-width", "1");
+      orbit.setAttribute("stroke", "yellow");
+      orbit.setAttribute("fill", "none");
+      viewport.appendChild(orbit);
 
-      context.beginPath();
-      context.arc(0, context.canvas.height/2, planet.radius * 45, 0, 2 * Math.PI, false);
-      context.closePath();
-      context.stroke();
+      var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("id", planet.name + "_Icon");
+      circle.setAttribute("cx", planet.radius * orbitScaling);
+      circle.setAttribute("cy", bBox.height / 2);
+      circle.setAttribute("r", planetDrawSize);
+      circle.setAttribute("stroke", "black");
+      circle.setAttribute("fill", "blue");
+      viewport.appendChild(circle);
 
-      context.beginPath();
-      context.arc(planet.radius * 45, context.canvas.height/2, planetDrawSize, 0, 2 * Math.PI, false);
-      context.closePath();
-      context.fill();
-    });
-    
-    context.fillStyle = "Yellow";
-    context.beginPath();
-    context.arc(0, context.canvas.height/2, starDrawSize, 0, 2 * Math.PI, false);
-    context.closePath();
-    context.fill();
+      planet.icon = circle;
+      planet.orbit = orbit;
+    })
+
+    var star = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    star.setAttribute("id", "starIcon");
+    star.setAttribute("cx", 0);
+    star.setAttribute("cy", bBox.height / 2);
+    star.setAttribute("r", planetDrawSize);
+    star.setAttribute("stroke", "orange");
+    star.setAttribute("fill", "yellow");
+    viewport.appendChild(star);
+  }
+
+  drawSystem(elapsedTime)
+  {
+    var star = document.getElementById("starIcon");
+    var starX = star.getAttribute("cx");
+    var starY = star.getAttribute("cy");
+
+    this.planets.forEach((planet) => {
+      var currentX = planet.icon.getAttribute("cx");
+      var currentY = planet.icon.getAttribute("cy");
+
+      var xCorrected = +currentX - starX;
+      var yCorrected = +currentY - starY;
+
+      var currentAngle = Math.atan(yCorrected / xCorrected);
+
+      var newX = (planet.radius * orbitScaling) * Math.cos(currentAngle + (orbitalRotationSpeedPx / (Math.sqrt(planet.icon.getAttribute("cx")**2 + planet.icon.getAttribute("cy")**2))));
+      var newY = (planet.radius * orbitScaling) * Math.sin(currentAngle + (orbitalRotationSpeedPx / (Math.sqrt(planet.icon.getAttribute("cx")**2 + planet.icon.getAttribute("cy")**2))));
+
+      planet.icon.setAttribute("cx", newX + +starX);
+      planet.icon.setAttribute("cy", newY + +starY);
+      planet.orbit.setAttribute("r", Math.sqrt(newX**2 + newY**2));
+    })
   }
 
   showSummary()

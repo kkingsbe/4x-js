@@ -19,6 +19,7 @@
         position: relative;
         width: 100%;
         height: 100%;
+        background: #00001a;
       }
       #canvas {
         position: absolute;
@@ -136,16 +137,19 @@
       }
     </style>
 
-    <script src="js/planetdefs.js"></script>
     <script src="js/settings.js"></script>
+    <script src="js/planetdefs.js"></script>
     <script src="js/system.js"></script>
     <script src="js/colony.js"></script>
     <script src="js/empire.js"></script>
   </head>
   <body>
+    <!--
     <div class="viewport-container">
       <canvas id="viewport"></canvas>
     </div>
+    -->
+    <svg class="viewport-container" id="viewport"></svg>
     
     <div class="col-sm-2 turn-control text-center">
       <button type="button" class="btn btn-info" onclick="newTurn()">Next Turn</button>
