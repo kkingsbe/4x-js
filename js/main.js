@@ -1,17 +1,20 @@
+var viewport = document.getElementById("viewport");
 setUpElements();
 
-var viewport = document.getElementById("viewport");
+/*
 var context = viewport.getContext("2d");
 context.canvas.width = window.innerWidth;
 context.canvas.height = window.innerHeight;
 context.fillStyle = backgroundcolor;
 context.fillRect(0, 0, viewport.width, viewport.height);
+*/
 
 var sysSummary = false;
 var economySummary = false;
 
 var empire = new Empire("SpaceX");
 var system = new System();
+system.configure();
 system.drawSystem();
 
 empire.addColony("Colony 1", system.planets[0]);
@@ -49,6 +52,30 @@ function setUpElements()
       case "e":
         showEconomySummary();
         break;
+      case "-":
+        zoomOut();
+        break;
+      case "+":
+        zoomIn();
+        break;
+    }
+  }
+
+  document.onkeydown = function(event) {
+    switch(event.key)
+    {
+      case "ArrowUp":
+        moveUp();
+        break;
+      case "ArrowRight":
+        moveRight();
+        break;
+      case "ArrowDown":
+        moveDown();
+        break;
+      case "ArrowLeft":
+        moveLeft();
+        break;
     }
   }
 }
@@ -56,6 +83,11 @@ function setUpElements()
 function newTurn()
 {
   var elapsedTime = document.getElementById("timeJumpRange").value;
+  system.newTurn(elapsedTime);
+}
+
+function newTurnNEW(elapsedTime)
+{
   system.newTurn(elapsedTime);
 }
 
@@ -130,4 +162,60 @@ function newColony()
 
     showEconomySummary();
   }
+}
+
+function moveLeft()
+{
+  var star = document.getElementById("starIcon");
+  star.setAttribute("cx", +star.getAttribute("cx") + cameraMovementConstant);
+
+  system.planets.forEach((planet) => {
+    planet.icon.setAttribute("cx", +planet.icon.getAttribute("cx") + cameraMovementConstant);
+    planet.orbit.setAttribute("cx", +planet.orbit.getAttribute("cx") + cameraMovementConstant);
+  })
+}
+
+function moveRight()
+{
+  var star = document.getElementById("starIcon");
+  star.setAttribute("cx", +star.getAttribute("cx") - cameraMovementConstant);
+
+  system.planets.forEach((planet) => {
+    planet.icon.setAttribute("cx", +planet.icon.getAttribute("cx") - cameraMovementConstant);
+    planet.orbit.setAttribute("cx", +planet.orbit.getAttribute("cx") - cameraMovementConstant);
+  })
+}
+
+function moveDown()
+{
+  var star = document.getElementById("starIcon");
+  star.setAttribute("cy", +star.getAttribute("cy") - cameraMovementConstant);
+
+  system.planets.forEach((planet) => {
+    planet.icon.setAttribute("cy", +planet.icon.getAttribute("cy") - cameraMovementConstant);
+    planet.orbit.setAttribute("cy", +planet.orbit.getAttribute("cy") - cameraMovementConstant);
+  })
+}
+
+function moveUp()
+{
+  var star = document.getElementById("starIcon");
+  star.setAttribute("cy", +star.getAttribute("cy") + cameraMovementConstant);
+
+  system.planets.forEach((planet) => {
+    planet.icon.setAttribute("cy", +planet.icon.getAttribute("cy") + cameraMovementConstant);
+    planet.orbit.setAttribute("cy", +planet.orbit.getAttribute("cy") + cameraMovementConstant);
+  })
+}
+
+function zoomIn()
+{
+  orbitScaling *= 1.5;
+  system.drawSystem();
+}
+
+function zoomOut()
+{
+  orbitScaling /= 1.5;
+  system.drawSystem();
 }
