@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
     <style>
+      * {
+        box-sizing: border-box;
+      }
       html, body {
         width: 100%;
         height: 100%;
@@ -19,7 +22,7 @@
         position: relative;
         width: 100%;
         height: 100%;
-        background: #00001a;
+        background: #050040;
       }
       #canvas {
         position: absolute;
@@ -34,8 +37,7 @@
         top: 0;
         width: 100%;
         height: 50px;
-        /*background: linear-gradient(90deg, #134E5E, #71B280);*/
-        background-color: #00B4DB;
+        background: linear-gradient(to right,#0090af, #0043db);
       }
       .topBar * {
         margin-top: 5px;
@@ -46,11 +48,27 @@
         float: right;
         margin-right: 7px;
       }
+      .primary-btn {
+        background: linear-gradient(#ffb44c, #ff9500);
+        color: #444444;
+      }
+      .primary-btn:hover {
+        -webkit-animation-name: smoothHover;
+        -webkit-animation-duration: 0.5s;
+      }
+      @keyframes smoothHover {
+        from {
+          filter: brightness(100%);
+        }
+        to {
+          filter: brightness(110%);
+        }
+      }
       table {
         border-spacing: 0px;
       }
       th {
-        background-color: #2a1659;
+        background-color: #0000aa;
         color: white;
       }
       tr {
@@ -69,7 +87,7 @@
       .table-center {
         border-radius: 6px;
         border-collapse: separate;
-        margin: auto;
+        margin-top: 20px;
       }
       .table-center th:first-child {
         border-radius: 6px 0 0 0;
@@ -91,7 +109,7 @@
       }
       .modal-content {
         /* background: linear-gradient(45deg, #667eea, #764ba2); */
-        background: #00B4DB;
+        background: linear-gradient(45deg,#0090af, #0043db);
         margin: 15% auto;
         padding: 20px;
         border: 1px solid #888;
@@ -179,11 +197,11 @@
     -->
     
     <div class="topBar">
-      <button type="button" class="btn btn-primary" style="margin-left: 5px;" onclick="showSysSummary()">System Summary</button>
-      <button type="button" class="btn btn-primary" onclick="showEconomySummary()">Economy</button>
-      <button type="button" class="btn btn-primary" onclick="showBuildDialog()">Build</button>
+      <button type="button" class="btn text-white" style="margin-left: 5px;" onclick="showSysSummary()">System Summary</button>
+      <button type="button" class="btn text-white" onclick="showEconomySummary()">Economy</button>
+      <button type="button" class="btn text-white" onclick="showBuildDialog()">Build</button>
 
-      <button type="button" class="btn btn-primary" style="float: right; margin-right: 5px;" onclick="newTurn()">Next Turn</button>
+      <button type="button" class="btn primary-btn" style="float: right; margin-right: 5px;" onclick="newTurn()">Next Turn</button>
       <select id="timeJumpSelector" class="form-control timeJump-selector">
         <option>Turn Length</option>
         <option>5 seconds</option>
@@ -226,7 +244,7 @@
           <span class="close">&times;</span>
         </div>
         <div class="modal-body">
-          <table id="sysSummaryTable" class="table-center" cellpadding="10">
+          <table id="sysSummaryTable" class="table-center mx-auto" cellpadding="10">
             <thead>
               <tr>
                 <th>Planet Name</th>
@@ -247,7 +265,7 @@
             <span class="close">&times;</span>
           </div>
           <div class="modal-body" id="economyModalBody">
-            <table id="economySummaryTable" class="table-center" cellpadding="10">
+            <table id="economySummaryTable" class="table-center mx-auto" cellpadding="10">
               <thead>
                 <tr>
                   <th>Colony Name</th>
@@ -264,7 +282,7 @@
               </thead>
               <tbody id="econTbody"></tbody>
             </table>
-            <button type="button" id="newColonyBtn" class="btn btn-primary" style="margin-top: 10px;" onclick="newColony()">New Colony</button>
+            <button type="button" id="newColonyBtn" class="btn primary-btn" style="margin-top: 10px;" onclick="newColony()">New Colony</button>
           </div>
         </div>
       </div>
