@@ -102,6 +102,8 @@ class TerrestrialPlanet
     this.calculateAtmosphere();
     this.radius = this.calculateRadius();
     this.colonies = [];
+    //Boolean to allow creation of land based colonies
+    this.canBuildColony = true;
 
     //References to the SVG objects that are assigned when the system is initaly drawn
     this.icon;
@@ -179,6 +181,8 @@ class GasGiant
     this.calculateAtmosphere();
     this.radius = this.calculateRadius();
     this.colonies = [];
+    //Boolean to allow creation of land based colonies
+    this.canBuildColony = false;
 
     //References to the SVG objects that are assigned when the system is initaly drawn
     this.icon;

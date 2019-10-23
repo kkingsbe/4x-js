@@ -17,9 +17,6 @@ var system = new System();
 system.configure();
 system.drawSystem(0);
 
-empire.addColony("Colony 1", system.planets[0]);
-empire.colonies[0].addMine();
-
 function setUpElements()
 {
   var sysSpan = document.getElementsByClassName("close")[0];
@@ -147,20 +144,26 @@ function newColony()
   body.appendChild(container);
 
   createColony.onclick = () => {
-    container.parentNode.removeChild(container);
-    var btn = document.createElement("button");
-    btn.setAttribute("type", "button");
-    btn.setAttribute("id", "newColonyBtn");
-    btn.setAttribute("class", "btn btn-primary");
-    btn.setAttribute("style", "margin-top: 10px");
-    btn.setAttribute("onclick", "newColony()");
-    btn.innerHTML = "New Colony";
-    body.appendChild(btn);
-
     var planet = system.getPlanet(hostPlanetSelector.value);
-    empire.addColony(nameInput.value, planet);
+    if(empire.canBuild("colony") && planet.canBuildColony)
+    {
+      container.parentNode.removeChild(container);
+      var btn = document.createElement("button");
+      btn.setAttribute("type", "button");
+      btn.setAttribute("id", "newColonyBtn");
+      btn.setAttribute("class", "btn btn-primary");
+      btn.setAttribute("style", "margin-top: 10px");
+      btn.setAttribute("onclick", "newColony()");
+      btn.innerHTML = "New Colony";
+      body.appendChild(btn);
 
-    showEconomySummary();
+      empire.addColony(nameInput.value, planet);
+      showEconomySummary();
+    }
+    else if(!planet.canBuildColony)
+    {
+      alert("This planet is not suitable for colonies!");
+    }
   }
 }
 
@@ -211,11 +214,11 @@ function moveUp()
 function zoomIn()
 {
   orbitScaling *= 1.5;
-  system.drawSystem();
+  system.drawSystem(0);
 }
 
 function zoomOut()
 {
   orbitScaling /= 1.5;
-  system.drawSystem();
+  system.drawSystem(0);
 }

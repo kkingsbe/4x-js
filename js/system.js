@@ -12,6 +12,47 @@ class System
     return Math.floor(Math.random() * (systemMaxPlanets - systemMinPlanets) + systemMinPlanets);
   }
 
+  /*
+  generatePlanets()
+  {
+    this.planets = [];
+    var planetGenerator = new PlanetGenerator();
+    for(var i = 0; i < this.numPlanets; i++)
+    {
+      //Regenerate the planet until it is farther away than the closest orbit as defined in the settings.js file
+      var goodOrbit = false;
+      while(!goodOrbit)
+      {
+        var planet = planetGenerator.generatePlanet(this);
+        if(this.planets.length > 0)
+        {
+          for(var otherPlanet of this.planets)
+          {
+            if(Math.abs(otherPlanet.radius - planet.radius) > closestPlanetOrbit)
+            {
+              console.log(Math.abs(otherPlanet.radius - planet.radius));
+              goodOrbit = true;
+            }
+          }
+          console.log(planet);
+        }
+        else
+        {
+          goodOrbit = true;
+        }
+      }
+      this.planets.push(planet);
+    }
+    this.planets.sort((a,b) => {
+      return a.radius - b.radius;
+    })
+    this.planets.forEach((planet) => {
+      planet.name = this.name + "-" + (this.planets.indexOf(planet) + 1);
+    })
+    console.log(this)
+  }
+  */
+
   generatePlanets()
   {
     this.planets = [];
@@ -113,7 +154,9 @@ class System
 
       planet.icon.setAttribute("cx", newX + +starX);
       planet.icon.setAttribute("cy", newY + +starY);
-      //planet.orbit.setAttribute("r", Math.sqrt(newX**2 + newY**2));
+      planet.orbit.setAttribute("cx", +starX);
+      planet.orbit.setAttribute("cy", +starY);
+      planet.orbit.setAttribute("r", Math.sqrt(newX**2 + newY**2));
     })
   }
 
@@ -144,5 +187,15 @@ class System
 
     //Replace the old tbody with the new tbody
     document.getElementById("sysTbody").parentNode.replaceChild(tbody, document.getElementById("sysTbody"));
+  }
+
+  //Centers the system in the viewport
+  center()
+  {
+    var bBox = viewport.getBoundingClientRect();
+    var star = document.getElementById("starIcon");
+    star.setAttribute("cx", bBox.width / 2);
+    star.setAttribute("cy", bBox.height / 2);
+    this.drawSystem(0);
   }
 }

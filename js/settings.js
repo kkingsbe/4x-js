@@ -13,6 +13,8 @@ var cameraMovementConstant = 10; //The number of pixels that the camera moves by
 */
 var orbitalRotationSpeedPx = (2 * Math.PI * orbitScaling) / 876;
 
+var closestPlanetOrbit = 2; //The closest 2 planets' orbits can be, in AU
+
 var buildings = {
   colony: {
     requiredResources : {

@@ -34,7 +34,7 @@ class Empire
   //Adds a colony to the empire
   addColony(name, planet)
   {
-    if(this.canBuild("colony"))
+    if(this.canBuild("colony") && planet.canBuildColony)
     {
       this.build("colony");
       var colony = new Colony(name, planet);
@@ -42,6 +42,10 @@ class Empire
       console.log(planet.colonies);
       planet.colonies.push(colony);
       return colony;
+    }
+    else if(!planet.canBuildColony)
+    {
+      alert("This planet is not suitable for colonies!");
     }
   }
 
