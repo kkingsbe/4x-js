@@ -187,7 +187,7 @@ function newColony()
   var createColony = document.createElement("button");
   createColony.setAttribute("id", "createColony");
   createColony.setAttribute("type", "button");
-  createColony.setAttribute("class", "colonyCreate btn btn-success");
+  createColony.setAttribute("class", "colonyCreate btn primary-btn");
   createColony.innerHTML = "Create";
 
   container.appendChild(nameInput);
@@ -204,7 +204,7 @@ function newColony()
       var btn = document.createElement("button");
       btn.setAttribute("type", "button");
       btn.setAttribute("id", "newColonyBtn");
-      btn.setAttribute("class", "btn btn-primary");
+      btn.setAttribute("class", "btn primary-btn");
       btn.setAttribute("style", "margin-top: 10px");
       btn.setAttribute("onclick", "newColony()");
       btn.innerHTML = "New Colony";
