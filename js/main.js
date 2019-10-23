@@ -211,7 +211,7 @@ function newColony()
       body.appendChild(btn);
 
       empire.addColony(nameInput.value, planet);
-      showEconomySummary();
+      empire.showSummary();
     }
     else if(!planet.canBuildColony)
     {
