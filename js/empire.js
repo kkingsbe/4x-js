@@ -109,6 +109,12 @@ class Empire
     document.getElementById("econTbody").parentNode.replaceChild(tbody, document.getElementById("econTbody"));
   }
 
+  showBuildDialog()
+  {
+    var modal = document.getElementById("economySummaryModal");
+    modal.style.display = "block";
+  }
+
   //Allows the user to choose their starting planet
   chooseStartingPlanet()
   {
