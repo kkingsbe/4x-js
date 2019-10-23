@@ -12,19 +12,22 @@ context.fillRect(0, 0, viewport.width, viewport.height);
 var sysSummary = false;
 var economySummary = false;
 var buildDialog = false;
+var newEmpire = false;
 
-var empire = new Empire("SpaceX");
+var empire = createNewEmpire();
 var system = new System();
+
 system.configure();
 system.drawSystem(0);
-empire.chooseStartingPlanet();
 
 function setUpElements()
 {
   var sysSpan = document.getElementsByClassName("close")[0];
-  var econSpan = document.getElementsByClassName("close")[1];
+  var econSpan = document.getElementsByClassName("close")[2];
+  var newEmpireSpan = document.getElementsByClassName("close")[1];
   var sysModal = document.getElementById("systemSummaryModal");
   var econModal = document.getElementById("economySummaryModal");
+  var newEmpireModal = document.getElementById("newEmpireModal");
 
   sysSpan.onclick = function() {
     sysModal.style.display = "none";
@@ -34,6 +37,11 @@ function setUpElements()
   econSpan.onclick = function() {
     econModal.style.display = "none";
     economySummary = false;
+  }
+
+  newEmpireSpan.onclick = function() {
+    newEmpireModal.style.display = "none";
+    newEmpire = false;
   }
 
   window.onkeypress = function(event) {
@@ -117,14 +125,18 @@ function newTurn()
     case "30 days":
       elapsedTime = 30 * 24;
       break;
-    default:
+    case "Turn Length":
       elapsedTime = "none";
   }
 
-  if(elapsedTime != "none") system.newTurn(elapsedTime);
-  totalElapsedHours += elapsedTime;
-  currentDateText = currentDate.addHours(elapsedTime).toString();
-  document.getElementById("dateLabel").innerHTML = currentDateText;
+  if(elapsedTime != "none") 
+  {
+    system.newTurn(elapsedTime);
+    totalElapsedHours += elapsedTime;
+    currentDate = addHours(currentDate, elapsedTime);
+    currentDateText = currentDate.toUTCString();
+    document.getElementById("dateLabel").innerHTML = currentDateText;
+  }
 }
 
 function newTurnNEW(elapsedTime)
@@ -134,7 +146,7 @@ function newTurnNEW(elapsedTime)
 
 function showSysSummary()
 {
-  if(!economySummary && !sysSummary)
+  if(allModalsClosed())
   {
     sysSummary = true;
     system.showSummary();
@@ -143,7 +155,7 @@ function showSysSummary()
 
 function showEconomySummary()
 {
-  if(!sysSummary && !economySummary)
+  if(allModalsClosed())
   {
     economySummary = true;
     empire.showSummary();
@@ -152,7 +164,7 @@ function showEconomySummary()
 
 function showBuildDialog()
 {
-  if(!economySummary && !sysSummary)
+  if(allModalsClosed())
   {
     buildDialog = true;
     empire.showBuildDialog();
@@ -274,4 +286,28 @@ function zoomOut()
 {
   orbitScaling /= 1.5;
   system.drawSystem(0);
+}
+
+function addHours(date, hours) 
+{
+  return new Date(date.getTime() + hours*3600000);
+}
+
+function allModalsClosed()
+{
+  return !(sysSummary && economySummary && buildDialog && newEmpire);
+}
+
+function createNewEmpire()
+{
+  if(allModalsClosed())
+  {
+    newEmpire = true;
+    var modal = document.getElementById("newEmpireModal");
+    modal.style.display = "block";
+  }
+
+  let empire = new Empire("SpaceX");
+  empire.chooseStartingPlanet();
+  return empire;
 }
