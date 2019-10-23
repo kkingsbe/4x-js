@@ -240,10 +240,10 @@
       <div class="modal-content">
         <div class="modal-header">
           <h2>New Empire</h2>
-          <span class="close">&times;</span>
         </div>
         <div class="modal-body">
-          <label>Test</label>
+          <input id="empireNameInput" class="form-control mx-auto" style="width: 30%; margin-top: 20px;"placeholder="Empire Name"/>
+          <button id="createEmpireBtn" class="btn primary-btn" style="margin-top: 10px;" onclick="finishCreateEmpire();">Create Empire</button>
         </div>
       </div>
     </div>
@@ -252,7 +252,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h2>System Summary</h2>
-          <span class="close">&times;</span>
+          <span class="close" id="systemSummarryClose">&times;</span>
         </div>
         <div class="modal-body">
           <table id="sysSummaryTable" class="table-center mx-auto" cellpadding="10">
@@ -273,7 +273,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h2>Economy</h2>
-            <span class="close">&times;</span>
+            <span class="close" id="economySummaryClose">&times;</span>
           </div>
           <div class="modal-body" id="economyModalBody">
             <table id="economySummaryTable" class="table-center mx-auto" cellpadding="10">

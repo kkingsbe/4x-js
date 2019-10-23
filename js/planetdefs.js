@@ -28,6 +28,8 @@ class PlanetGenerator
 var terrestrialPlanetParams = {
   minRadius: 0.4,
   maxRadius: 2,
+  //The maximum amount of a single resource that a planet can have
+  maxResource: 1000000,
   //The resources & atmosphere + their weight
   resources: [
     {

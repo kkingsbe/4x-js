@@ -14,7 +14,10 @@ var economySummary = false;
 var buildDialog = false;
 var newEmpire = false;
 
-var empire = createNewEmpire();
+createNewEmpire();
+
+//Will be initialized once the user creates their empire thorugh the dialog
+var empire;
 var system = new System();
 
 system.configure();
@@ -22,9 +25,8 @@ system.drawSystem(0);
 
 function setUpElements()
 {
-  var sysSpan = document.getElementsByClassName("close")[0];
-  var econSpan = document.getElementsByClassName("close")[2];
-  var newEmpireSpan = document.getElementsByClassName("close")[1];
+  var sysSpan = document.getElementById("systemSummarryClose");
+  var econSpan = document.getElementById("economySummaryClose");
   var sysModal = document.getElementById("systemSummaryModal");
   var econModal = document.getElementById("economySummaryModal");
   var newEmpireModal = document.getElementById("newEmpireModal");
@@ -37,11 +39,6 @@ function setUpElements()
   econSpan.onclick = function() {
     econModal.style.display = "none";
     economySummary = false;
-  }
-
-  newEmpireSpan.onclick = function() {
-    newEmpireModal.style.display = "none";
-    newEmpire = false;
   }
 
   window.onkeypress = function(event) {
@@ -295,7 +292,7 @@ function addHours(date, hours)
 
 function allModalsClosed()
 {
-  return !(sysSummary && economySummary && buildDialog && newEmpire);
+  return !(sysSummary || economySummary || buildDialog || newEmpire);
 }
 
 function createNewEmpire()
@@ -306,8 +303,14 @@ function createNewEmpire()
     var modal = document.getElementById("newEmpireModal");
     modal.style.display = "block";
   }
+}
 
-  let empire = new Empire("SpaceX");
-  empire.chooseStartingPlanet();
-  return empire;
+function finishCreateEmpire()
+{
+  empire = new Empire(document.getElementById("empireNameInput").value);
+
+  newEmpireModal.style.display = "none";
+  newEmpire = false;
+
+  showEconomySummary();
 }
