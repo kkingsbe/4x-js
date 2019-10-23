@@ -108,4 +108,10 @@ class Empire
     //Replace the old tbody with the new tbody
     document.getElementById("econTbody").parentNode.replaceChild(tbody, document.getElementById("econTbody"));
   }
+
+  //Allows the user to choose their starting planet
+  chooseStartingPlanet()
+  {
+    this.showSummary();
+  }
 }

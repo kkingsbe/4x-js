@@ -29,9 +29,22 @@
         top: 0;
         right: 0;
       }
-      .topNavigation {
+      .topBar {
         position: absolute;
         top: 0;
+        width: 100%;
+        height: 50px;
+        /*background: linear-gradient(90deg, #134E5E, #71B280);*/
+        background-color: #00B4DB;
+      }
+      .topBar * {
+        margin-top: 5px;
+      }
+      .timeJump-selector {
+        cursor: pointer;
+        width: 12%;
+        float: right;
+        margin-right: 7px;
       }
       table {
         border-spacing: 0px;
@@ -135,6 +148,12 @@
         border-top-right-radius: 50px;
         border-bottom-right-radius: 50px;
       }
+      .dateLabel {
+        position: absolute; 
+        right: 0px; 
+        bottom: 0px;
+        color: darkgoldenrod;
+      }
     </style>
 
     <script src="js/settings.js"></script>
@@ -151,15 +170,42 @@
     -->
     <svg class="viewport-container" id="viewport"></svg>
     
+    <!--
     <div class="col-sm-2 turn-control text-center">
-      <button type="button" class="btn btn-info" onclick="newTurn()">Next Turn</button>
+      
       <input type="range" class="custom-range" id="timeJumpRange" min="1" max="24" value="0" step="1" oninput="document.getElementById('turnLengthLbl').innerHTML = 'Turn Length: ' + this.value + 'h'">
       <p style="color:white" id="turnLengthLbl">Turn Length: 1h</p>
     </div>
+    -->
     
+    <div class="topBar">
+      <button type="button" class="btn btn-primary" style="margin-left: 5px;" onclick="showSysSummary()">System Summary</button>
+      <button type="button" class="btn btn-primary" onclick="showEconomySummary()">Economy</button>
+      <button type="button" class="btn btn-primary" onclick="">Build</button>
+
+      <button type="button" class="btn btn-primary" style="float: right; margin-right: 5px;" onclick="newTurn()">Next Turn</button>
+      <select id="timeJumpSelector" class="form-control timeJump-selector">
+        <option>Turn Length</option>
+        <option>5 seconds</option>
+        <option>30 seconds</option>
+        <option>2 minutes</option>
+        <option>5 minutes</option>
+        <option>20 minutes</option>
+        <option>1 hour</option>
+        <option>3 hours</option>
+        <option>8 hours</option>
+        <option>1 day</option>
+        <option>5 days</option>
+        <option>30 days</option>
+      </select>
+    </div>
+
+    <label id="dateLabel" class="dateLabel"></label>
+
+    <!--
     <ul class="topNavigation nav nav-pills mb-3" id="pills-tab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Map</a>
+        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" role="tab" aria-controls="pills-home" aria-selected="true">Map</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">System Summary</a>
@@ -171,6 +217,7 @@
         <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Build</a>
       </li>
     </ul>
+    -->
 
     <div id="systemSummaryModal" class="modal">
       <div class="modal-content">
