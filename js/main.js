@@ -11,6 +11,7 @@ context.fillRect(0, 0, viewport.width, viewport.height);
 
 var sysSummary = false;
 var economySummary = false;
+var buildDialog = false;
 
 var empire = new Empire("SpaceX");
 var system = new System();
@@ -133,7 +134,7 @@ function newTurnNEW(elapsedTime)
 
 function showSysSummary()
 {
-  if(!economySummary)
+  if(!economySummary && !sysSummary)
   {
     sysSummary = true;
     system.showSummary();
@@ -142,10 +143,19 @@ function showSysSummary()
 
 function showEconomySummary()
 {
-  if(!sysSummary)
+  if(!sysSummary && !economySummary)
   {
     economySummary = true;
     empire.showSummary();
+  }
+}
+
+function showBuildDialog()
+{
+  if(!economySummary && !sysSummary)
+  {
+    buildDialog = true;
+    empire.showBuildDialog();
   }
 }
 
