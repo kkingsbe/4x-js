@@ -16,6 +16,7 @@ var empire = new Empire("SpaceX");
 var system = new System();
 system.configure();
 system.drawSystem(0);
+empire.chooseStartingPlanet();
 
 function setUpElements()
 {
@@ -79,8 +80,50 @@ function setUpElements()
 
 function newTurn()
 {
-  var elapsedTime = document.getElementById("timeJumpRange").value;
-  system.newTurn(elapsedTime);
+  var elapsedTime;
+  switch(document.getElementById("timeJumpSelector").value)
+  {
+    case "5 seconds":
+      elapsedTime = 5 / (60 * 60);
+      break;
+    case "30 seconds":
+      elapsedTIme = 30 / (60 * 60);
+      break;
+    case "2 minutes":
+      elapsedTime = 2 / 60;
+      break;
+    case "5 minutes":
+      elapsedTime = 5 / 60;
+      break;
+    case "20 minutes":
+      elapsedTime = 20 / 60;
+      break;
+    case "1 hour":
+      elapsedTime = 1;
+      break;
+    case "3 hours":
+      elapsedTime = 3;
+      break;
+    case "8 hours":
+      elapsedTime = 8;
+      break;
+    case "1 day":
+      elapsedTime = 1 * 24;
+      break;
+    case "5 days":
+      elapsedTime = 5 * 24;
+      break;
+    case "30 days":
+      elapsedTime = 30 * 24;
+      break;
+    default:
+      elapsedTime = "none";
+  }
+
+  if(elapsedTime != "none") system.newTurn(elapsedTime);
+  totalElapsedHours += elapsedTime;
+  currentDateText = currentDate.addHours(elapsedTime).toString();
+  document.getElementById("dateLabel").innerHTML = currentDateText;
 }
 
 function newTurnNEW(elapsedTime)
