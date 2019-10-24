@@ -182,6 +182,14 @@ class System
       row.appendChild(name);
       row.appendChild(type);
       row.appendChild(radius);
+
+      for(var resource in planet.remainingResources)
+      {
+        var td = document.createElement("td");
+        td.innerHTML = planet.remainingResources[resource];
+        row.appendChild(td);
+      }
+
       tbody.appendChild(row);
     })
 

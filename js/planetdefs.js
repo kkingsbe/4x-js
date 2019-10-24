@@ -116,8 +116,10 @@ class TerrestrialPlanet
   calculateResources()
   {
     this.resources = {};
+    this.remainingResources = {};
     terrestrialPlanetParams.resources.forEach((resource) => {
       this.resources[resource.name] = +(Math.random() * resource.concentration).toFixed(2); //Yes, the + is neccessary :(, toFixed() returns a string
+      this.remainingResources[resource.name] = (Math.random() * terrestrialPlanetParams.maxResource);
     })
   }
   

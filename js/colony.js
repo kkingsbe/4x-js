@@ -33,6 +33,7 @@ class Colony
       }
 
       this.resources[resource].amount += this.planet.resources[resource] * elapsedTime * this.mines;
+      this.planet.remainingResources[resource] -= this.planet.resources[resource] * elapsedTime * this.mines;
     }
   }
 
