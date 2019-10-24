@@ -111,7 +111,7 @@ class Empire
 
   showBuildDialog()
   {
-    var modal = document.getElementById("economySummaryModal");
+    var modal = document.getElementById("buildModal");
     modal.style.display = "block";
   }
 

@@ -64,24 +64,24 @@
           filter: brightness(110%);
         }
       }
-      table {
+      .horizontal-table {
         border-spacing: 0px;
       }
-      th {
+      .horizontal-table th {
         background-color: #0000aa;
         color: white;
       }
-      tr {
+      .horizontal-table tr {
         background-color: #f2f2f2;
         color: #595959;
       }
-      tr:nth-child(even) {
+      .horizontal-table tr:nth-child(even) {
         background-color: white;
       }
-      tr:last-child td:first-child {
+      .horizontal-table tr:last-child td:first-child {
         border-bottom-left-radius: 6px;
       }
-      tr:last-child td:last-child {
+      .horizontal-table tr:last-child td:last-child {
         border-bottom-right-radius: 6px;
       }
       .table-center {
@@ -172,6 +172,30 @@
         bottom: 0px;
         color: darkgoldenrod;
       }
+      .vertical-table {
+        border-spacing: 0px;
+        border-collapse: separate;
+        border-radius: 10px;
+      }
+      .vertical-table tr:nth-child(even) {
+        background-color: white;
+      }
+      .vertical-table tr {
+        background-color: #f2f2f2;
+        color: #595959;
+      }
+      .vertical-table:first-child tr {
+        background-color: #ffffff;
+      }
+      #designBody {
+        color: black;
+        background-color: whitesmoke;
+        margin-top: 20px;
+      }
+      #shipSummary {
+        left: 0px;
+        width: 30%;
+      }
     </style>
 
     <script src="js/settings.js"></script>
@@ -199,7 +223,7 @@
     <div class="topBar">
       <button type="button" class="btn text-white" style="margin-left: 5px;" onclick="showSysSummary()">System Summary</button>
       <button type="button" class="btn text-white" onclick="showEconomySummary()">Economy</button>
-      <button type="button" class="btn text-white" onclick="showBuildDialog()">Build</button>
+      <button type="button" class="btn text-white" onclick="showBuildDialog()">Design</button>
 
       <button type="button" class="btn primary-btn" style="float: right; margin-right: 5px;" onclick="newTurn()">Next Turn</button>
       <select id="timeJumpSelector" class="form-control timeJump-selector">
@@ -220,22 +244,6 @@
 
     <label id="dateLabel" class="dateLabel"></label>
 
-    <!--
-    <ul class="topNavigation nav nav-pills mb-3" id="pills-tab" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" role="tab" aria-controls="pills-home" aria-selected="true">Map</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">System Summary</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Economy</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Build</a>
-      </li>
-    </ul>
-    -->
     <div id="newEmpireModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
@@ -255,7 +263,7 @@
           <span class="close" id="systemSummarryClose">&times;</span>
         </div>
         <div class="modal-body">
-          <table id="sysSummaryTable" class="table-center mx-auto" cellpadding="10">
+          <table id="sysSummaryTable" class="horizontal-table table-center mx-auto" cellpadding="10">
             <thead>
               <tr>
                 <th>Planet Name</th>
@@ -276,7 +284,7 @@
             <span class="close" id="economySummaryClose">&times;</span>
           </div>
           <div class="modal-body" id="economyModalBody">
-            <table id="economySummaryTable" class="table-center mx-auto" cellpadding="10">
+            <table id="economySummaryTable" class="horizontal-table table-center mx-auto" cellpadding="10">
               <thead>
                 <tr>
                   <th>Colony Name</th>
@@ -294,6 +302,48 @@
               <tbody id="econTbody"></tbody>
             </table>
             <button type="button" id="newColonyBtn" class="btn primary-btn" style="margin-top: 10px;" onclick="newColony()">New Colony</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="buildModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Design</h2>
+            <span class="close" id="buildDialogClose">&times;</span>
+          </div>
+          <div class="modal-body">
+            <select id="designSelect" class="form-control mx-auto" style="width: 20%;" onchange="designSelectUpdate();">
+              <option>Ship</option>
+              <option>Missile</option>
+              <option>Missile Tube</option>
+              <option>Laser</option>
+              <option>Ballistic Weapon</option>
+            </select>
+            <div id="designBody">
+              <table id="shipSummary" class="vertical-table">
+                <tr>
+                  <th>Fuel</th>
+                  <td>20 tons</td>
+                </tr>
+                <tr>
+                  <th>Cargo Space</th>
+                  <td>10 tons</td>
+                </tr>
+                <tr>
+                  <th>Engines</th>
+                  <td>7</td>
+                </tr>
+                <tr>
+                  <th>Peak Acceleration</th>
+                  <td>30 m/s^2</td>
+                </tr>
+                <tr>
+                  <th>Engine Burn Time</th>
+                  <td>3 years</td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
       </div>

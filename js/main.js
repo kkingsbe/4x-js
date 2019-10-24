@@ -30,6 +30,8 @@ function setUpElements()
   var sysModal = document.getElementById("systemSummaryModal");
   var econModal = document.getElementById("economySummaryModal");
   var newEmpireModal = document.getElementById("newEmpireModal");
+  var buildModal = document.getElementById("buildModal");
+  var buildSpan = document.getElementById("buildDialogClose");
 
   sysSpan.onclick = function() {
     sysModal.style.display = "none";
@@ -39,6 +41,11 @@ function setUpElements()
   econSpan.onclick = function() {
     econModal.style.display = "none";
     economySummary = false;
+  }
+
+  buildSpan.onclick = function() {
+    buildModal.style.display = "none";
+    buildDialog = false;
   }
 
   window.onkeypress = function(event) {
@@ -313,4 +320,27 @@ function finishCreateEmpire()
   newEmpire = false;
 
   showEconomySummary();
+}
+
+function designSelectUpdate()
+{
+  let body = document.getElementById("designBody");
+  body.childNodes.forEach((element) => {
+    body.removeChild(element);
+  })
+
+  let select = document.getElementById("designSelect");
+  switch(select.value)
+  {
+    case "Ship":
+      break;
+    case "Missile":
+      break;
+    case "Missile Tube":
+      break;
+    case "Laser":
+      break;
+    case "Ballistic Weapon":
+      break;
+  }
 }
