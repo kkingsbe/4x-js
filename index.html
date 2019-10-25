@@ -66,6 +66,7 @@
       }
       .horizontal-table {
         border-spacing: 0px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
       }
       .horizontal-table th {
         background-color: #0000aa;
@@ -123,6 +124,9 @@
         text-align: center;
         padding: 5px;
       }
+      .modal-header {
+        margin-bottom: 20px;
+      }
 
       /* The close button */
       .close {
@@ -175,7 +179,8 @@
       .vertical-table {
         border-spacing: 0px;
         border-collapse: separate;
-        border-radius: 10px;
+        border-radius: 20px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
       }
       .vertical-table tr:nth-child(even) {
         background-color: white;
@@ -184,13 +189,44 @@
         background-color: #f2f2f2;
         color: #595959;
       }
-      .vertical-table:first-child tr {
-        background-color: #ffffff;
+      .vertical-table:first-child tr > th {
+        background-color: #0000aa;
+        color: white;
+        padding: 10px;
+      }
+      .vertical-table tr > td {
+        padding: 10px;
+      }
+      .vertical-table:first-child tr:nth-child(even) > th{
+        background-color: #0000bf;
+        color: white;
+      }
+      .vertical-table:first-child tr:first-child > th{
+        background-color: #0000aa;
+        color: white;
+        border-top-left-radius: 20px;
+      }
+      .vertical-table:first-child tr:last-child > th{
+        background-color: #0000aa;
+        color: white;
+        border-bottom-left-radius: 20px;
+      }
+      .vertical-table:first-child tr:first-child > td{
+        border-top-right-radius: 20px;
+      }
+      .vertical-table:first-child tr:last-child > td{
+        border-bottom-right-radius: 20px;
+      }
+      .design-btn-grid {
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+        grid-row-gap: 10px;
       }
       #designBody {
         color: black;
-        background-color: whitesmoke;
         margin-top: 20px;
+        border-radius: 10px;
       }
       #shipSummary {
         left: 0px;
@@ -320,8 +356,8 @@
               <option>Laser</option>
               <option>Ballistic Weapon</option>
             </select>
-            <div id="designBody">
-              <table id="shipSummary" class="vertical-table">
+            <div id="designBody" style="display: flex; justify-content: space-between; margin-top: 50px;">
+              <table id="shipSpecs" class="vertical-table" style="width: 30%;">
                 <tr>
                   <th>Fuel</th>
                   <td>20 tons</td>
@@ -336,11 +372,31 @@
                 </tr>
                 <tr>
                   <th>Peak Acceleration</th>
-                  <td>30 m/s^2</td>
+                  <td>30 m/s<sup>2</sup></td>
                 </tr>
                 <tr>
                   <th>Engine Burn Time</th>
                   <td>3 years</td>
+                </tr>
+              </table>
+              <div class="design-btn-grid">
+                <button type="button" class="btn primary-btn">Fuel Storage</button>
+                <button type="button" class="btn primary-btn">Engines</button>
+                <button type="button" class="btn primary-btn">Crew Compartments</button>
+                <button type="button" class="btn primary-btn">Armor</button>
+              </div>
+              <table id="shipSummary" class="horizontal-table" style="float: right; width: 30%;">
+                <tr>
+                  <th>Component</th>
+                  <th>Amount</th>
+                </tr>
+                <tr>
+                  <td>Ion Thruster</td>
+                  <td>20</td>
+                </tr>
+                <tr>
+                  <td>Chemical Thruster</td>
+                  <td>10</td>
                 </tr>
               </table>
             </div>
