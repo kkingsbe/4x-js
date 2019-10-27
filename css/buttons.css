@@ -1,0 +1,32 @@
+.turn-control {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.primary-btn {
+  background: linear-gradient(#ffb44c, #ff9500);
+  color: #444444;
+}
+@keyframes smoothHover {
+  from {
+    filter: brightness(100%);
+  }
+  to {
+    filter: brightness(110%);
+  }
+}
+
+.primary-btn:hover {
+  -webkit-animation-name: smoothHover;
+  -webkit-animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+
+.design-btn-grid {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-row-gap: 10px;
+}

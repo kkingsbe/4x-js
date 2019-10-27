@@ -9,10 +9,8 @@ context.fillStyle = backgroundcolor;
 context.fillRect(0, 0, viewport.width, viewport.height);
 */
 
-var sysSummary = false;
-var economySummary = false;
-var buildDialog = false;
-var newEmpire = false;
+//A string that stores the active modal popup
+var activeScreen = "none"
 
 createNewEmpire();
 
@@ -25,29 +23,22 @@ system.drawSystem(0);
 
 function setUpElements()
 {
-  var sysSpan = document.getElementById("systemSummarryClose");
-  var econSpan = document.getElementById("economySummaryClose");
   var sysModal = document.getElementById("systemSummaryModal");
   var econModal = document.getElementById("economySummaryModal");
   var newEmpireModal = document.getElementById("newEmpireModal");
   var buildModal = document.getElementById("buildModal");
-  var buildSpan = document.getElementById("buildDialogClose");
 
-  sysSpan.onclick = function() {
-    sysModal.style.display = "none";
-    sysSummary = false;
-  }
+  //Set on the onclick function for the close buttons
+  document.querySelectorAll(".close").forEach(element => {
+    element.addEventListener("click", event => {
+      var modal = element.parentNode.parentNode.parentNode;
+      modal.style.display = "none";
+      activeScreen = "none";
+    })
+  })
 
-  econSpan.onclick = function() {
-    econModal.style.display = "none";
-    economySummary = false;
-  }
 
-  buildSpan.onclick = function() {
-    buildModal.style.display = "none";
-    buildDialog = false;
-  }
-
+  
   window.onkeypress = function(event) {
     if(event.target == sysModal) {
       this.sysModal.style.display = "none";
@@ -152,7 +143,7 @@ function showSysSummary()
 {
   if(allModalsClosed())
   {
-    sysSummary = true;
+    activeScreen = "sysSummary";
     system.showSummary();
   }
 }
@@ -161,7 +152,7 @@ function showEconomySummary()
 {
   if(allModalsClosed())
   {
-    economySummary = true;
+    activeScreen = "economySummary";
     empire.showSummary();
   }
 }
@@ -170,7 +161,7 @@ function showBuildDialog()
 {
   if(allModalsClosed())
   {
-    buildDialog = true;
+    activeScreen = "buildDialog";
     empire.showBuildDialog();
   }
 }
@@ -299,7 +290,7 @@ function addHours(date, hours)
 
 function allModalsClosed()
 {
-  return !(sysSummary || economySummary || buildDialog || newEmpire);
+  return activeScreen == "none";
 }
 
 function createNewEmpire()
@@ -342,5 +333,75 @@ function designSelectUpdate()
       break;
     case "Ballistic Weapon":
       break;
+  }
+}
+
+function showShipComponentDialog(name)
+{
+  var designComponentDialog = document.getElementById("designComponentDialog");
+  designComponentDialog.style.display = "block";
+  switch(name)
+  {
+    case "Fuel Storage":
+      break;
+    case "Engines":
+      showEngines();
+      break;
+  }
+
+  function showEngines()
+  {
+    document.getElementById("componentSelectTableHeader").childNodes.forEach((element) => {
+      document.getElementById("componentSelectTableHeader").removeChild(element);
+    })
+
+    document.getElementById("componentSelectTableBody").childNodes.forEach((element) => {
+      document.getElementById("componentSelectTableBody").removeChild(element);
+    })
+
+    var header = document.createElement("tr");
+    header.setAttribute("id", "header");
+    components.engines.fields.forEach((field) => {
+      var th = document.createElement("th");
+      th.innerHTML = field;
+      header.appendChild(th);
+    })
+    document.getElementById("componentSelectTableHeader").appendChild(header);
+
+    components.engines.designed.forEach((engine) => {
+      var row = document.createElement("tr");
+      for(var param in engine)
+      {
+        var text = "";
+        if(param == "materials")
+        {
+          var materials = engine.materials;
+          console.log(materials);
+          for(var material in materials)
+          {
+            text += material + ": " + materials[material] + ", ";
+          }
+          text = text.replace(/,\s*$/, "");
+        }
+        else
+        {
+          text = engine[param];
+        }
+        var td = document.createElement("td");
+        td.innerHTML = text;
+        row.appendChild(td);
+      }
+      document.getElementById("componentSelectTableBody").appendChild(row);
+    })
+
+    //Add onclick handlers to the rows
+    var rows = document.getElementById("componentSelectTable").rows;
+    console.log(rows.length);
+    for (i = 0; i < rows.length; i++) {
+        rows[i].onclick = function(){ return function(){
+                var id = this.cells[0].innerHTML;
+                alert("id:" + id);
+        };}(rows[i]);
+    }
   }
 }

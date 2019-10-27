@@ -1,0 +1,121 @@
+/* Horizontal Table */
+.horizontal-table {
+  border-spacing: 0px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+.horizontal-table th {
+  background-color: #0000aa;
+  color: white;
+}
+.horizontal-table tr {
+  background-color: #f2f2f2;
+  color: #595959;
+}
+.horizontal-table tr:nth-child(even) {
+  background-color: white;
+}
+.horizontal-table tr:last-child td:first-child {
+  border-bottom-left-radius: 6px;
+}
+.horizontal-table tr:last-child td:last-child {
+  border-bottom-right-radius: 6px;
+}
+.table-center {
+  border-radius: 6px;
+  border-collapse: separate;
+  margin-top: 20px;
+}
+.table-center th:first-child {
+  border-radius: 6px 0 0 0;
+}
+.table-center th:last-child {
+  border-radius: 0 6px 0 0;
+}
+
+/* Vertical Table */
+.vertical-table {
+  border-spacing: 0px;
+  border-collapse: separate;
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+.vertical-table tr:nth-child(even) {
+  background-color: white;
+}
+.vertical-table tr {
+  background-color: #f2f2f2;
+  color: #595959;
+}
+.vertical-table:first-child tr > th {
+  background-color: #0000aa;
+  color: white;
+  padding: 10px;
+}
+.vertical-table tr > td {
+  padding: 10px;
+}
+.vertical-table:first-child tr:nth-child(even) > th{
+  background-color: #0000bf;
+  color: white;
+}
+.vertical-table:first-child tr:first-child > th{
+  background-color: #0000aa;
+  color: white;
+  border-top-left-radius: 20px;
+}
+.vertical-table:first-child tr:last-child > th{
+  background-color: #0000aa;
+  color: white;
+  border-bottom-left-radius: 20px;
+}
+.vertical-table:first-child tr:first-child > td{
+  border-top-right-radius: 20px;
+}
+.vertical-table:first-child tr:last-child > td{
+  border-bottom-right-radius: 20px;
+}
+
+/* Selectable Table */
+.selectable-table {
+  border-spacing: 0px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+.selectable-table th {
+  background-color: #0000aa;
+  padding: 10px;
+  border-right: solid 1px #595959;
+  text-align: center;
+}
+.selectable-table td {
+  background: #ffffff;
+  color: #595959;
+  padding: 10px;
+  text-align: center;
+  border-right: solid 1px #3b3f74;
+  cursor: pointer;
+}
+.selectable-table tr > td:last-child {
+  border-right: none;
+}
+.selectable-table tr > th:last-child {
+  border-right: none;
+}
+.selectable-table tr:nth-child(even) td {
+  background: #f2f2f2;
+}
+.selectable-table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+.selectable-table tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+.selectable-table tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+.selectable-table tr:first-child th:last-child {
+  border-top-right-radius: 10px;
+}
+.selectable-table tr:hover td{
+  background-color: #d8d7d7;
+}

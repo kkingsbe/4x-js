@@ -7,238 +7,18 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-      html, body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-      }
-      .viewport-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        background: #050040;
-      }
-      #canvas {
-        position: absolute;
-      }
-      .turn-control {
-        position: absolute;
-        top: 0;
-        right: 0;
-      }
-      .topBar {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 50px;
-        background: linear-gradient(to right,#0090af, #0043db);
-      }
-      .topBar * {
-        margin-top: 5px;
-      }
-      .timeJump-selector {
-        cursor: pointer;
-        width: 12%;
-        float: right;
-        margin-right: 7px;
-      }
-      .primary-btn {
-        background: linear-gradient(#ffb44c, #ff9500);
-        color: #444444;
-      }
-      .primary-btn:hover {
-        -webkit-animation-name: smoothHover;
-        -webkit-animation-duration: 0.5s;
-      }
-      @keyframes smoothHover {
-        from {
-          filter: brightness(100%);
-        }
-        to {
-          filter: brightness(110%);
-        }
-      }
-      .horizontal-table {
-        border-spacing: 0px;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-      }
-      .horizontal-table th {
-        background-color: #0000aa;
-        color: white;
-      }
-      .horizontal-table tr {
-        background-color: #f2f2f2;
-        color: #595959;
-      }
-      .horizontal-table tr:nth-child(even) {
-        background-color: white;
-      }
-      .horizontal-table tr:last-child td:first-child {
-        border-bottom-left-radius: 6px;
-      }
-      .horizontal-table tr:last-child td:last-child {
-        border-bottom-right-radius: 6px;
-      }
-      .table-center {
-        border-radius: 6px;
-        border-collapse: separate;
-        margin-top: 20px;
-      }
-      .table-center th:first-child {
-        border-radius: 6px 0 0 0;
-      }
-      .table-center th:last-child {
-        border-radius: 0 6px 0 0;
-      }
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black with opacity */
-      }
-      .modal-content {
-        /* background: linear-gradient(45deg, #667eea, #764ba2); */
-        background: linear-gradient(45deg,#0090af, #0043db);
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        color: white;
-      }
-      .modal-body {
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        text-align: center;
-        padding: 5px;
-      }
-      .modal-header {
-        margin-bottom: 20px;
-      }
-
-      /* The close button */
-      .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-      }
-
-      .close:hover,
-      .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-      }
-
-      .newColonyContainer {
-        margin: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .colonyNameInput {
-        float: left;
-        width: 25%;
-        height: 100%;
-        border-top-left-radius: 50px;
-        border-bottom-left-radius: 50px;
-        border-top-right-radius: 0px;
-        border-bottom-right-radius: 0px;
-        margin-right: 0px;
-      }
-      .colonyPlanetSelect {
-        float: left;
-        width: 10%;
-        height: 100%;
-        border-radius: 0;
-        margin-left: 0px;
-      }
-      .colonyCreate {
-        border-top-right-radius: 50px;
-        border-bottom-right-radius: 50px;
-      }
-      .dateLabel {
-        position: absolute; 
-        right: 0px; 
-        bottom: 0px;
-        color: darkgoldenrod;
-      }
-      .vertical-table {
-        border-spacing: 0px;
-        border-collapse: separate;
-        border-radius: 20px;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-      }
-      .vertical-table tr:nth-child(even) {
-        background-color: white;
-      }
-      .vertical-table tr {
-        background-color: #f2f2f2;
-        color: #595959;
-      }
-      .vertical-table:first-child tr > th {
-        background-color: #0000aa;
-        color: white;
-        padding: 10px;
-      }
-      .vertical-table tr > td {
-        padding: 10px;
-      }
-      .vertical-table:first-child tr:nth-child(even) > th{
-        background-color: #0000bf;
-        color: white;
-      }
-      .vertical-table:first-child tr:first-child > th{
-        background-color: #0000aa;
-        color: white;
-        border-top-left-radius: 20px;
-      }
-      .vertical-table:first-child tr:last-child > th{
-        background-color: #0000aa;
-        color: white;
-        border-bottom-left-radius: 20px;
-      }
-      .vertical-table:first-child tr:first-child > td{
-        border-top-right-radius: 20px;
-      }
-      .vertical-table:first-child tr:last-child > td{
-        border-bottom-right-radius: 20px;
-      }
-      .design-btn-grid {
-        display: grid;
-        grid-template-columns: auto;
-        grid-template-rows: auto;
-        grid-row-gap: 10px;
-      }
-      #designBody {
-        color: black;
-        margin-top: 20px;
-        border-radius: 10px;
-      }
-      #shipSummary {
-        left: 0px;
-        width: 30%;
-      }
-    </style>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/modal.css">
 
     <script src="js/settings.js"></script>
     <script src="js/planetdefs.js"></script>
     <script src="js/system.js"></script>
     <script src="js/colony.js"></script>
     <script src="js/empire.js"></script>
+    <script src="js/components.js"></script>
   </head>
   <body>
     <!--
@@ -380,10 +160,10 @@
                 </tr>
               </table>
               <div class="design-btn-grid">
-                <button type="button" class="btn primary-btn">Fuel Storage</button>
-                <button type="button" class="btn primary-btn">Engines</button>
-                <button type="button" class="btn primary-btn">Crew Compartments</button>
-                <button type="button" class="btn primary-btn">Armor</button>
+                <button type="button" class="btn primary-btn" onclick="showShipComponentDialog('Fuel Storage')">Fuel Storage</button>
+                <button type="button" class="btn primary-btn" onclick="showShipComponentDialog('Engines')">Engines</button>
+                <button type="button" class="btn primary-btn" onclick="showShipComponentDialog('Crew Compartments')">Crew Compartments</button>
+                <button type="button" class="btn primary-btn" onclick="showShipComponentDialog('Armor')">Armor</button>
               </div>
               <table id="shipSummary" class="horizontal-table" style="float: right; width: 30%;">
                 <tr>
@@ -400,6 +180,21 @@
                 </tr>
               </table>
             </div>
+          </div>
+        </div>
+      </div>
+      <div id="designComponentDialog" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close" id="designComponentClose">&times;</span>
+          </div>
+          <table class="selectable-table" id="componentSelectTable">
+            <thead id="componentSelectTableHeader"></thead>
+            <tbody id="componentSelectTableBody"></tbody>
+          </table>
+          <div class="mx-auto addComponentContainer">
+            <input class="form-control" placeholder="amount">
+            <button type="button" class="btn primary-btn">Add</button>
           </div>
         </div>
       </div>
