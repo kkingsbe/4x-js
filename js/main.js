@@ -340,6 +340,10 @@ function showShipComponentDialog(name)
 {
   var designComponentDialog = document.getElementById("designComponentDialog");
   designComponentDialog.style.display = "block";
+
+  //REPLACE THIS
+  var ship = new Ship("test");
+
   switch(name)
   {
     case "Fuel Storage":
@@ -351,6 +355,7 @@ function showShipComponentDialog(name)
 
   function showEngines()
   {
+    var selectedEngine;
     document.getElementById("componentSelectTableHeader").childNodes.forEach((element) => {
       document.getElementById("componentSelectTableHeader").removeChild(element);
     })
@@ -376,7 +381,6 @@ function showShipComponentDialog(name)
         if(param == "materials")
         {
           var materials = engine.materials;
-          console.log(materials);
           for(var material in materials)
           {
             text += material + ": " + materials[material] + ", ";
@@ -396,12 +400,28 @@ function showShipComponentDialog(name)
 
     //Add onclick handlers to the rows
     var rows = document.getElementById("componentSelectTable").rows;
-    console.log(rows.length);
     for (i = 0; i < rows.length; i++) {
         rows[i].onclick = function(){ return function(){
-                var id = this.cells[0].innerHTML;
-                alert("id:" + id);
+                selectedEngine = this.cells[0].innerHTML;
+                var row = this.cells[0].parentNode;
+                $(row).addClass("selected").siblings().removeClass("selected");
         };}(rows[i]);
+    }
+
+    //Add onclick handler to "add" button
+    var addBtn = document.getElementById("addComponentBtn");
+    addBtn.onclick = function() {
+      let amount = document.getElementById("addComponentInput").value;
+      if(!ship.components.engines.find(engine => engine.name == selectedEngine))
+      {
+        ship.components.engines.push(components.engines.designed.find(engine => engine.name == selectedEngine));
+        ship.components.engines.find(engine => engine.name == selectedEngine).amount = +amount;
+      }
+      else
+      {
+        ship.components.engines.find(engine => engine.name == selectedEngine).amount += +amount;
+      }
+      $(document.getElementById("componentSelectTable")).find("tr").removeClass("selected");
     }
   }
 }

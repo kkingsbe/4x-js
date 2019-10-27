@@ -116,6 +116,9 @@
 .selectable-table tr:first-child th:last-child {
   border-top-right-radius: 10px;
 }
-.selectable-table tr:hover td{
+.selectable-table tr:hover td {
   background-color: #d8d7d7;
+}
+.selected td {
+  background-color: #83adec !important;
 }

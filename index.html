@@ -13,12 +13,15 @@
     <link rel="stylesheet" href="css/buttons.css">
     <link rel="stylesheet" href="css/modal.css">
 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
     <script src="js/settings.js"></script>
     <script src="js/planetdefs.js"></script>
     <script src="js/system.js"></script>
     <script src="js/colony.js"></script>
     <script src="js/empire.js"></script>
     <script src="js/components.js"></script>
+    <script src="js/ship.js"></script>
   </head>
   <body>
     <!--
@@ -193,8 +196,8 @@
             <tbody id="componentSelectTableBody"></tbody>
           </table>
           <div class="mx-auto addComponentContainer">
-            <input class="form-control" placeholder="amount">
-            <button type="button" class="btn primary-btn">Add</button>
+            <input id="addComponentInput" class="form-control" placeholder="amount">
+            <button id="addComponentBtn" type="button" class="btn primary-btn">Add</button>
           </div>
         </div>
       </div>
